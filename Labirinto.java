@@ -3,7 +3,7 @@ public class Labirinto{
     
     private static final int Vazio = '0';
     private static final int Parede = '1';
-    private static final int tamanho = 10;
+    private static final int tamanho = 20;
     private static char[][] Labirinto;
     private static final double Probabilidade = 0.7;
     private static final char Inicio = 'I';
