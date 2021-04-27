@@ -1,5 +1,4 @@
-import java.util.Random;
-public class Labirinto{
+public class Labirinto {
     
     private static final int Vazio = '0';
     private static final int Parede = '1';
@@ -8,66 +7,20 @@ public class Labirinto{
     private static final double Probabilidade = 0.7;
     private static final char Inicio = 'I';
     private static final char Final = 'F';
-    private static char Rastro = 'X';
-    private static char sem_saida = '#';
     private static int linhainicio;
     private static int colunainicio;
     private static int linhafinal;
     private static int colunafinal;
 
-    //procurar caminho
-    public static boolean procurarCaminho(int linhaAtual, int colunaAtual){
-        int proxLinha, proxColuna;
-        boolean achou = false;
-
-        // subir
-        proxLinha = linhaAtual - 1;
-        proxColuna = colunaAtual;
-        achou = tentarCaminho(proxLinha, proxColuna);
-        // descer
-        if (!achou){
-            proxLinha = linhaAtual + 1;
-            proxColuna = colunaAtual;
-            achou = tentarCaminho(proxLinha, proxColuna);
-        }
-        // esquerda
-        if(!achou){
-            proxLinha = linhaAtual;
-            proxColuna = colunaAtual - 1;
-            achou = tentarCaminho(proxLinha, proxColuna);
-        }
-        // direita
-        if(!achou){
-            proxLinha = linhaAtual;
-            proxColuna = colunaAtual + 1;
-            achou = tentarCaminho(proxLinha, proxColuna);
-        }
-        return achou;
-    }
-    //tentar caminho
-    public static boolean tentarCaminho(int proxLinha, int proxColuna){
-        boolean achou = false;
-        if (Labirinto[proxLinha][proxColuna] == Final){
-            achou = true;
-        } else if(Labirinto[proxLinha][proxColuna] == Vazio){
-            Labirinto[proxLinha][proxColuna] = Rastro;
-            imprimirLab();
-            achou = procurarCaminho(proxLinha, proxColuna);
-        if(!achou){
-            Labirinto[proxLinha][proxColuna] = sem_saida;
-            imprimirLab();
-            }
-        }
-        return achou;
-    }
-    
     //gerar numero 
     public static int gerarNumero(int minimo, int maximo){
         int valor = (int) Math.round(Math.random()*(maximo-minimo));
         return minimo+valor;
     }
     //iniciar labirinto
-    public static void iniciarLab(){
+    public void iniciarLab(){
+        
+        Labirinto = new char [tamanho][tamanho];
         for (int i=0; i < tamanho; i++){
 
         }
@@ -87,9 +40,16 @@ public class Labirinto{
             colunafinal = gerarNumero(tamanho/2, tamanho-2);
             Labirinto[linhafinal][colunafinal] = Final;
     }
-    //
+    //Devolve linha inicio
+    public int linhaInicio(){
+        return linhainicio;
+    }
+    //Devolve coluna inicio
+    public int colunainicio(){
+        return colunainicio;
+    }
     //imprimir labirinto
-    public static void imprimirLab(){
+    public void imprimirLab(){
         for (int i=0; i<tamanho; i++){
             for (int j=0; j<tamanho; j++){
                 System.out.print(Labirinto[i][j] + " ");
@@ -101,20 +61,6 @@ public class Labirinto{
         } catch(InterruptedException e){
             e.printStackTrace();
         }
-    }
-    //main
-    public static void main(String arg[]){
-        Labirinto = new char [tamanho][tamanho];
-        iniciarLab();
-        imprimirLab();
-        System.out.println("\n procurando solucao \n");
-        boolean achou = procurarCaminho(linhainicio, colunainicio);
-        if(achou){
-            System.out.println("achou caminho");
-        } else {
-            System.out.println("não tem caminho");
-        }
-        
     }
     
 }
