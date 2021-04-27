@@ -2,7 +2,7 @@ public class Labirinto {
     
     private static final int Vazio = '0';
     private static final int Parede = '1';
-    private static final int tamanho = 20;
+    private static final int tamanho = 22;
     private static char[][] Labirinto;
     private static final double Probabilidade = 0.7;
     private static final char Inicio = 'I';
@@ -57,7 +57,7 @@ public class Labirinto {
             System.out.println();
         }
         try{
-            Thread.sleep(300);
+            Thread.sleep(500);
         } catch(InterruptedException e){
             e.printStackTrace();
         }
